@@ -120,7 +120,7 @@ with tab2:
     sleep_duration = st.number_input("Berapa jam rata-rata Anda tidur dalam sehari?", min_value=0.0, max_value=24.0, value=7.0)
     quality_of_sleep = st.slider("Pada skala 1 sampai 10, bagaimana kualitas tidur Anda?", min_value=1, max_value=10, value=5)
     physical_activity_level = st.number_input("Seberapa aktif Anda secara fisik? (Masukkan persen antara 0-100)", min_value=0, max_value=100, value=50)
-    bmi_category = st.selectbox("Kategori BMI mana yang paling menggambarkan Anda?", df['BMI Category'].unique())
+    bmi_category = st.selectbox("Kategori BMI mana yang paling menggambarkan Anda?", ["Normal", "Overweight", "Obese"])
     systolic = st.number_input("Berapa tekanan darah sistolik Anda?", min_value=50, max_value=200, value=120)
     diastolic = st.number_input("Berapa tekanan darah diastolik Anda?", min_value=30, max_value=130, value=80)
     heart_rate = st.number_input("Berapa detak jantung Anda saat istirahat?", min_value=0, max_value=200, value=70)
