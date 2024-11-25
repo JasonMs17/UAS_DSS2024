@@ -42,7 +42,7 @@ h1, h2, h3, p {
 st.sidebar.title("Selamat Datang di Aplikasi Deteksi Stres ❤️‍🩹")
 st.sidebar.markdown("---")
 st.sidebar.write("""
-Aplikasi ini dirancang untuk membantu dalam memahami hubungan antara berbagai faktor kesehatan dan tingkat stres. Model dikembangkan Naive Bayes dengan menggunakan dataset **[Sleep Health and Lifestyle Dataset](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset)** 
+Aplikasi ini dirancang untuk membantu dalam memahami hubungan antara berbagai faktor kesehatan dan tingkat stres. Model dikembangkan dengan metode Naive Bayes menggunakan dataset **[Sleep Health and Lifestyle Dataset](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset)** 
 """)
 
 st.title("Deteksi Stress Level")
