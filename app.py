@@ -6,10 +6,10 @@ import seaborn as sns
 from utils import generate_recommendation, guide_data, bmi_calculator
 from sklearn.preprocessing import LabelEncoder
 
-# Load trained model and encoders
+# Load model
 model, encoders, accuracy = load_model()
 
-# Load data to calculate average stress level
+# Load data 
 df = pd.read_csv("dataset.csv")
 label_encoder = LabelEncoder()
 factors = ['Sleep Duration', 'Quality of Sleep', 'Heart Rate', 'Daily Steps']
@@ -21,6 +21,13 @@ st.markdown("""
 [data-testid="stMain"] {
     background-image: url("https://cdn.britannica.com/25/214625-050-A37D76CC/heart-rate-monitor-illustration-heartbeat.jpg");
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh; /* Ensures it covers the full viewport height */
+    width: 100vw;  /* Ensures it covers the full viewport width */
+    overflow: hidden; /* Prevents any scrolling issues */
+    position: relative; /* Ensures layering works properly */
 }
             
 [data-testid="stMain"]::before {
@@ -103,7 +110,6 @@ with tab2:
 
         avg_values = [average_stress[factor].mean() for factor in factors]
 
-        # Create separate bar charts for each category of factors
         fig, axs = plt.subplots(1, len(factors), figsize=(20, 5))
         bar_width = 0.35
 
@@ -125,7 +131,7 @@ with tab2:
 with tab3:
     st.header("Hubungan dan Correlation Antar Faktor")
     
-    # Display the correlation values directly
+    # Menampilkan korelasi
     correlation_values = {
         'Gender': 0.396018,
         'Age': -0.422344,
@@ -137,11 +143,9 @@ with tab3:
         'Sleep Disorder': -0.036058
     }
     
-    # Display the correlation values
     st.write("Nilai Korelasi terhadap Tingkat Stres:")
     st.write(pd.DataFrame(list(correlation_values.items()), columns=["Faktor", "Korelasi"]))
     
-    # Explanation in Bahasa Indonesia
     st.write("""
     Berdasarkan analisis korelasi terhadap tingkat stres, berikut adalah hubungan antara beberapa faktor dan tingkat stres:
     
@@ -162,7 +166,6 @@ with tab3:
     - **Gangguan Tidur (-0.036)**: Korelasi sangat lemah menunjukkan bahwa gangguan tidur tidak memiliki pengaruh signifikan terhadap tingkat stres, meskipun gangguan tidur dapat mempengaruhi kualitas tidur yang berhubungan erat dengan stres.
     """)
 
-    # Optional: You can also add a brief sentence to summarize the most influential factors
     st.write("""
     Dari faktor-faktor di atas, **durasi tidur** dan **kualitas tidur** memiliki korelasi yang sangat kuat dengan tingkat stres. Oleh karena itu, menjaga tidur yang cukup dan berkualitas adalah salah satu cara yang paling efektif untuk mengelola stres.
     """)
