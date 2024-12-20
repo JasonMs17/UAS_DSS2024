@@ -24,10 +24,10 @@ st.markdown("""
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    height: 100vh; /* Ensures it covers the full viewport height */
-    width: 100vw;  /* Ensures it covers the full viewport width */
-    overflow: hidden; /* Prevents any scrolling issues */
-    position: relative; /* Ensures layering works properly */
+    height: 100vh;
+    width: 100vw;  
+    overflow: hidden;
+    position: relative; 
 }
             
 [data-testid="stMain"]::before {
