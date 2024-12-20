@@ -23,21 +23,21 @@ st.markdown("""
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed;
-    height: 100vh;
-    width: 100vw;  
-    overflow: hidden;
-    position: relative; 
+    position: relative; /* Ensures proper stacking context */
+    min-height: 100vh; /* Ensures it covers the full viewport height */
+    width: 100%; /* Makes it flexible to adapt to different screen widths */
 }
-            
+
 [data-testid="stMain"]::before {
     content: "";
-    position: absolute;
+    position: fixed; /* Cover the entire viewport */
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.7); /* Overlay color */
+    z-index: 0; /* Place behind content */
+    pointer-events: none; /* Prevent interference with content */
 }
             
 h1, h2, h3, p {
