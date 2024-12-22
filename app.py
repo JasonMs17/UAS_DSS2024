@@ -6,16 +6,19 @@ import seaborn as sns
 from utils import generate_recommendation, guide_data, bmi_calculator
 from sklearn.preprocessing import LabelEncoder
 
-# Load model
+# **Load model machine learning**
+# Model digunakan untuk memprediksi tingkat stres berdasarkan input pengguna.
 model, encoders, accuracy = load_model()
 
-# Load data 
+# **Memuat dataset**
+# Dataset digunakan untuk menghitung rata-rata faktor kesehatan berdasarkan tingkat stres.
 df = pd.read_csv("dataset.csv")
 label_encoder = LabelEncoder()
 factors = ['Sleep Duration', 'Quality of Sleep', 'Heart Rate', 'Daily Steps']
 average_stress = df.groupby('Stress Level')[factors].mean()
 
-# Styling
+# **Styling aplikasi**
+# Menambahkan latar belakang dengan overlay gelap untuk estetika aplikasi.
 st.markdown("""
 <style>
 [data-testid="stMain"] {
@@ -46,16 +49,19 @@ h1, h2, h3, p {
 </style>
 """, unsafe_allow_html=True)
 
+# **Sidebar: Informasi aplikasi**
 st.sidebar.title("Selamat Datang di Aplikasi Deteksi Stres ❤️‍🩹")
 st.sidebar.markdown("---")
 st.sidebar.write("""
 Aplikasi ini dirancang untuk membantu dalam memahami hubungan antara berbagai faktor kesehatan dan tingkat stres. Model dikembangkan dengan metode Random Forest menggunakan dataset **[Sleep Health and Lifestyle Dataset](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset)** 
 """)
 
+# **Tampilan utama aplikasi**
 st.title("Deteksi Stress Level")
 tab1, tab2, tab3 = st.tabs(["Beranda", "Formulir", "Hubungan Korelasi"])
 
-# Tab Beranda
+# **Tab 1: Beranda**
+# Menampilkan akurasi model dan panduan penggunaan aplikasi.
 with tab1:
 
     st.write(f"""
@@ -66,7 +72,8 @@ Model ini telah diuji dengan data yang tersedia dan memiliki tingkat akurasi {ac
 
     st.table(pd.DataFrame(guide_data))
 
-# Tab Formulir
+# **Tab 2: Formulir**
+# Formulir untuk input data pengguna yang akan digunakan dalam prediksi.
 with tab2:
     st.header("Jawab Pertanyaan Berikut")
     gender = st.selectbox("Jenis Kelamin Anda?", ["Male", "Female"])
@@ -85,7 +92,7 @@ with tab2:
     daily_steps = st.number_input("Berapa langkah rata-rata yang Anda ambil setiap hari?", min_value=0, max_value=50000, value=5000)
     sleep_disorder = st.selectbox("Apakah Anda memiliki gangguan tidur yang didiagnosis?", ['Sleep Apnea', 'Insomnia', 'Nothing'])
 
-
+    # **Prediksi tingkat stres**
     if st.button("Prediksi Tingkat Stres"):
         input_data = {
             'Gender': [gender],
@@ -101,10 +108,13 @@ with tab2:
         stress_level = predict_stress_level(input_data, model, encoders)
         st.write(f"Tingkat stres Anda: **{stress_level}**")
         # recommendations = generate_recommendation(stress_level, sleep_duration, quality_of_sleep, activity_level, heart_rate)
+        
+        # **Rekomendasi berdasarkan tingkat stres**
         recommendations = generate_recommendation(stress_level, sleep_duration, quality_of_sleep, heart_rate)
         for rec in recommendations:
             st.write(f"- {rec}")
  
+        # **Visualisasi perbandingan input dengan rata-rata**
         factors = ['Sleep Duration', 'Quality of Sleep', 'Heart Rate', 'Daily Steps']
         values = [sleep_duration, quality_of_sleep, heart_rate, daily_steps]
 
@@ -127,7 +137,8 @@ with tab2:
 
         st.pyplot(fig)
 
-# Tab Hubungan Correlation
+# **Tab 3: Hubungan Korelasi**
+# Analisis korelasi faktor-faktor dengan tingkat stres.
 with tab3:
     st.header("Hubungan dan Correlation Antar Faktor")
     
